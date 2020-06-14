@@ -1,0 +1,9 @@
+{
+  "name": "webscoket-server-implementation-exampe",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "debug": "node --inspect=9229 app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

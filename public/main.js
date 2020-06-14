@@ -1,5 +1,5 @@
 class WebSocketConnection {
-  static get STATE() {
+  static get STATES() {
     return {
       'CONNECTING': 0, // соединение ещё не установлено,
       'OPEN': 1, // обмен данными,
@@ -8,9 +8,10 @@ class WebSocketConnection {
     }
   }
 
-  constructor(url, protocols) {
+  constructor(url, protocols, onmessage) {
     this.ws = new WebSocket(url, protocols);
     this.addEventListeners(this.ws);
+    this.messageHandler = onmessage;
   }
 
   get events() {
@@ -66,13 +67,42 @@ class WebSocketConnection {
 
   onmessage(event) {
     console.log('message: ', event);
+    this.messageHandler(event);
   }
 }
 
-const socket = new WebSocketConnection('ws://localhost:3000/ws', ['json']);
+const socket = new WebSocketConnection('ws://localhost:3000/ws', ['json'], onMessage);
 
-setTimeout(() => {
+const user = prompt('Enter your name');
+
+const chatElement = document.getElementById('chat');
+const form = document.querySelector('form');
+const input = form.elements[0];
+
+function createMessageElement(user, text) {
+  const item = document.createElement('li');
+  item.innerHTML = `
+    <span class="username">${user}</span>. <span>${text}</span>
+  `;
+  chatElement.appendChild(item);
+}
+
+function onMessage(event) {
+  try {
+    console.log(event.data);
+    const { message, user } = JSON.parse(event.data);
+    createMessageElement(user, message);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const message = input.value.trim();
   socket.send(JSON.stringify({
-    message: 'Hello'
-  }))
-}, 1000)
+    message,
+    user
+  }));
+  input.value = '';
+})

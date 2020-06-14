@@ -4,8 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body {
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 1.5rem;
+      min-height: 100vh;
+      max-width: 480px;
+      background-color: #f6f6f6;
+    }
+
+    form {
+      position: sticky;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      grid-gap: 0.5em;
+    }
+
+    ul {
+      color: #575757;
+    }
+
+    li + li {
+      margin-top: 1em;
+    }
+
+    .username {
+      color: #000;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
+  <ul id="chat"></ul>
+  <form>
+    <input type="text">
+    <button>send message</button>
+  </form>
   <script type="module" async src="main.js"></script>
 </body>
 </html>

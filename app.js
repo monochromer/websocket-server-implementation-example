@@ -44,7 +44,7 @@ const server = http.createServer((req, res) => {
       res.end();
   }
 }).listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 server.on('upgrade', (req, socket) => {
@@ -77,10 +77,21 @@ server.on('upgrade', (req, socket) => {
     const message = parseMessage(buffer);
     if (message) {
       console.log(message);
-      socket.write(constructReply({ message }));
+      clients.forEach(client => {
+        client.write(constructReply(message));
+      })
     } else if (message === null) {
       console.log('WebSocket connection closed by the client.');
     }
+  });
+
+  socket.on('close', (event) => {
+    console.log('close: ', event);
+    clients.delete(socket);
+  });
+
+  socket.on('error', (err) => {
+    console.error(err);
   });
 });
 
