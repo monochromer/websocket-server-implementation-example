@@ -1,4 +1,5 @@
 class WebSocketConnection {
+  // TODO: just use WebSocket.OPEN, WebSocket.CLOSED and etc.
   static get STATES() {
     return {
       'CONNECTING': 0, // соединение ещё не установлено,
