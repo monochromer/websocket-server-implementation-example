@@ -3,6 +3,7 @@
 ## Статьи
 - [WebSocket](https://learn.javascript.ru/websocket)
 - [Srushtika Neelakantam. Implementing a WebSocket server with Node.js](https://medium.com/hackernoon/implementing-a-websocket-server-with-node-js-d9b78ec5ffa8)
+- [Alexander Zlatkov. How JavaScript works: Deep dive into WebSockets and HTTP/2 with SSE + how to pick the right path](https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7)
 
 ## Заметки
 
