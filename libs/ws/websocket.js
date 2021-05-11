@@ -141,16 +141,9 @@ class WebSocketServer extends EventEmitter {
         if (message) {
           socket.emit('message', constructReply(message));
         } else if (message === null) {
+          socket.destroy();
           console.log('WebSocket connection closed by the client.');
         }
-      });
-
-      socket.on('close', (event) => {
-        socket.emit('close', event);
-      });
-
-      socket.on('error', (err) => {
-        socket.emit('error', err);
       });
     });
   }
