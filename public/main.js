@@ -1,18 +1,7 @@
-class WebSocketConnection {
-  // TODO: just use WebSocket.OPEN, WebSocket.CLOSED and etc.
-  static get STATES() {
-    return {
-      'CONNECTING': 0, // соединение ещё не установлено,
-      'OPEN': 1, // обмен данными,
-      'CLOSING': 2, // соединение закрывается,
-      'CLOSED': 3, // соединение закрыто.
-    }
-  }
-
-  constructor(url, protocols, onmessage) {
-    this.ws = new WebSocket(url, protocols);
-    this.addEventListeners(this.ws);
-    this.messageHandler = onmessage;
+class WebSocketConnection extends WebSocket {
+  constructor(url, protocols) {
+    super(url, protocols);
+    this.addEventListeners(this);
   }
 
   get events() {
@@ -46,14 +35,6 @@ class WebSocketConnection {
     );
   }
 
-  send(data) {
-    this.ws.send(data);
-  }
-
-  close(code, reason) {
-    this.ws.close(code, reason);
-  }
-
   onopen(event) {
     console.log('Connection is open: ', event);
   }
@@ -68,11 +49,12 @@ class WebSocketConnection {
 
   onmessage(event) {
     console.log('message: ', event);
-    this.messageHandler(event);
   }
 }
 
-const socket = new WebSocketConnection('ws://localhost:3000/ws', ['json'], onMessage);
+const socket = new WebSocketConnection('ws://localhost:3000/ws', ['json']);
+
+socket.addEventListener('message', onMessage);
 
 const user = prompt('Enter your name');
 
