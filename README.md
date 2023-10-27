@@ -7,7 +7,7 @@
 - [Alexander Zlatkov. How JavaScript works: Deep dive into WebSockets and HTTP/2 with SSE + how to pick the right path](https://blog.sessionstack.com/how-javascript-works-deep-dive-into-websockets-and-http-2-with-sse-how-to-pick-the-right-path-584e6b8e3bf7)
 - [Имплементируем WebSocket протокол на Go](https://habr.com/ru/post/674694/)
 - [Websockets for Deno on Rust](https://github.com/denoland/fastwebsockets)
-- https://github.com/HowProgrammingWorks/Websocket/blob/main/NodeJS/server.js
+- https://github.com/HowProgrammingWorks/Websocket/blob/main/NodeJS/server.js, https://github.com/metarhia/metacom/blob/master/lib/websocket.js
 ## Заметки
 
 Браузер делает http-запрос для утановления ws-соединения:
